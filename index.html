@@ -18,6 +18,36 @@
 </head>
 <body class="text-gray-800">
 
+  <!-- หน้าจอโหลดระหว่างเช็คสถานะเปิด-ปิดรับสมัคร -->
+<div id="statusLoadingOverlay" style="display: flex; position: fixed; inset: 0; z-index: 9999; background-color: #0E5143;" class="flex-col items-center justify-center p-4">
+  <div class="w-12 h-12 border-4 border-[#D4E858] border-t-transparent rounded-full animate-spin mb-4"></div>
+  <p class="text-white font-medium text-lg">กำลังตรวจสอบสถานะการรับสมัคร...</p>
+</div>
+
+<!-- หน้าจอแจ้งเตือนเมื่อปิดรับสมัคร (ธีมเดียวกับระบบหลัก) -->
+<div id="closedRegistrationScreen" style="display: none; position: fixed; inset: 0; z-index: 9999; background-color: #0E5143;" class="items-center justify-center p-5 overflow-y-auto">
+  <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl border-b-[6px] border-[#D4E858]">
+    <div class="relative mx-auto w-24 h-24 bg-[#D4E858] rounded-2xl flex items-center justify-center shadow-sm mb-6">
+      <span class="text-5xl">⚡</span>
+      <div class="absolute -bottom-3 -right-2 bg-red-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full border-2 border-white shadow-sm flex items-center gap-1">
+        🔒 CLOSED
+      </div>
+    </div>
+    <h1 class="text-xl font-bold text-[#0E5143] mb-1">โซน F สถานีเติมพลัง</h1>
+    <h2 class="text-sm font-semibold text-gray-500 mb-4">(Boost Energy Station)</h2>
+    <div class="inline-block bg-red-50 text-red-600 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+      ปิดรับสมัครชั่วคราว
+    </div>
+    <p id="closedCustomMessage" class="text-gray-600 text-sm mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
+      ขณะนี้สิ้นสุดระยะเวลาการรับสมัครผู้ประกอบการ โซน F ประจำปี 2570 เรียบร้อยแล้ว
+    </p>
+    <a href="https://line.me/ti/p/~PMKUF" target="_blank" class="inline-flex items-center justify-center gap-2 w-full bg-[#00B900] text-white px-4 py-3 rounded-xl font-bold text-sm hover:bg-green-600 transition shadow-sm">
+      <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.759.031 1.061l-.198 1.189c-.062.374-.298 1.442 1.266.78 1.563-.661 8.442-4.974 10.957-8.156 1.127-1.42 1.851-2.99 1.851-4.708z"/></svg>
+      สอบถามเพิ่มเติม LINE: PMKUF
+    </a>
+  </div>
+</div>
+
   <!-- ==============================
        ส่วนที่ 1: Landing Page
   =============================== -->
@@ -1150,6 +1180,34 @@
       // 4. เลื่อนกลับไปบนสุด
       window.scrollTo(0,0);
     }
+
+
+    // เช็คสถานะ เปิด/ปิด รับสมัครอัตโนมัติเมื่อเปิดหน้าเว็บ
+document.addEventListener("DOMContentLoaded", function() {
+  const checkStatusURL = "https://script.google.com/macros/s/AKfycbzv7bkk4frmW_aQP3Jd9xhlJMCqow-LIiLZ-6FgQvJdkJbuY76edYg-_rAwbxqrrWU/exec?action=status";
+
+  fetch(checkStatusURL)
+    .then(response => response.json())
+    .then(data => {
+      const loadingEl = document.getElementById("statusLoadingOverlay");
+      const closedEl = document.getElementById("closedRegistrationScreen");
+      const msgEl = document.getElementById("closedCustomMessage");
+
+      const currentStatus = (data.status || "").toUpperCase();
+      if (currentStatus === "OPEN" || currentStatus === "เปิด") {
+        if (loadingEl) loadingEl.style.display = "none";
+      } else {
+        if (loadingEl) loadingEl.style.display = "none";
+        if (msgEl && data.message) msgEl.textContent = data.message;
+        if (closedEl) closedEl.style.display = "flex";
+      }
+    })
+    .catch(error => {
+      console.error("Error checking status:", error);
+      const loadingEl = document.getElementById("statusLoadingOverlay");
+      if (loadingEl) loadingEl.style.display = "none";
+    });
+});
   </script>
 
 
