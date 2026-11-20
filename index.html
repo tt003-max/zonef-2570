@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ใบสมัครเกษตรแฟร์ 2570 - โซน F</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Prompt', sans-serif; background-color: #F6F5EE; }
+    .hidden-section { display: none !important; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    /* ขยายพื้นที่กด Checkbox/Radio บนมือถือ */
+    input[type="checkbox"], input[type="radio"] { transform: scale(1.2); }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- ==============================
+       ส่วนที่ 1: Landing Page
+  =============================== -->
+  <div id="landingView" class="min-h-[100dvh] w-full bg-[#0E5143] flex flex-col relative overflow-hidden">
+    <!-- Background Elements (ตกแต่งให้ดูมีมิติ) -->
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-white opacity-5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-[-10%] right-[-5%] w-[30rem] h-[30rem] bg-[#D4E858] opacity-10 rounded-full blur-3xl"></div>
+
+    <!-- Header / Logo -->
+    <nav class="p-6 md:p-8 flex items-center gap-3 relative z-10 shrink-0">
+      <div class="w-10 h-10 bg-[#D4E858] rounded-full flex items-center justify-center font-bold text-xl shadow-lg">⚡</div>
+      <div class="text-white">
+        <div class="text-[10px] font-bold tracking-widest text-[#D4E858]">KASET FAIR 2570</div>
+        <div class="text-sm font-bold">Boost Energy Station</div>
+      </div>
+    </nav>
+
+    <!-- Main Content (กึ่งกลางหน้าจอเสมอ) -->
+    <div class="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-24 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full max-w-7xl mx-auto">
+        
+        <!-- ฝั่งซ้าย: ข้อความ -->
+        <div class="space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 bg-[#D4E858] text-[#0E5143] px-4 py-1.5 rounded-full text-xs font-bold shadow-md">
+            <span class="w-2 h-2 rounded-full bg-[#0E5143] animate-pulse"></span>
+            เปิดรับสมัครร้านค้าแล้ว
+          </div>
+          
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            เติมพลังให้ร้านคุณ<br>
+            <span class="text-[#D4E858]">กลางใจเกษตรแฟร์</span>
+          </h1>
+          
+          <p class="text-white/80 text-sm md:text-base max-w-md mx-auto lg:mx-0 leading-relaxed">
+            สมัครพื้นที่จำหน่ายสินค้าในโซน F – สถานีเติมพลัง 
+            พื้นที่รวมร้านอาหาร เครื่องดื่ม และไลฟ์สไตล์สำหรับคนรุ่นใหม่
+          </p>
+
+          <button onclick="startApplication()" class="mt-4 bg-[#D4E858] text-[#0E5143] px-8 py-3.5 rounded-full font-bold text-lg hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,232,88,0.4)] flex items-center gap-2 mx-auto lg:mx-0">
+            เริ่มกรอกใบสมัคร <span class="text-xl">→</span>
+          </button>
+        </div>
+
+        <!-- ฝั่งขวา: รูปภาพแผนที่ (เพิ่มลูกเล่นกดขยาย) -->
+        <div class="relative group cursor-zoom-in mx-auto w-full max-w-[500px]" onclick="openMapModal()">
+          <div class="absolute -inset-1 bg-gradient-to-r from-[#D4E858] to-emerald-500 rounded-[2rem] blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+          <div class="relative bg-white p-3 rounded-[2rem] shadow-2xl transform transition-transform duration-300 group-hover:scale-[1.02]">
+            <div class="absolute top-4 left-[-10px] bg-[#F47521] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg z-20">
+              ZONE F
+            </div>
+            <img src="https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/1.%20%E0%B8%9C%E0%B8%B1%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99%20(%E0%B8%A3%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%88%E0%B8%B2%E0%B8%81%E0%B8%9B%E0%B8%B5%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%81%E0%B8%A5%E0%B9%89%E0%B8%A7).jpg?raw=true" 
+                 alt="แผนที่ผังงาน" class="rounded-xl w-full h-auto object-cover">
+            
+            <!-- ข้อความใบ้ว่าให้กดรูป -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 rounded-[1.5rem] transition-opacity duration-300">
+              <span class="bg-white text-[#0E5143] px-4 py-2 rounded-full font-bold text-sm flex items-center gap-2">
+                🔍 กดเพื่อดูภาพขนาดใหญ่
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Info Bar (ย่อให้กะทัดรัดติดขอบล่าง) -->
+    <div class="bg-white/10 backdrop-blur-md border-t border-white/20 p-4 shrink-0 z-10 mt-6 lg:mt-0">
+      <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="text-white">
+          <p class="text-[10px] text-white/70">พื้นที่เริ่มต้น</p>
+          <p class="font-bold text-sm">15,000 บาท</p>
+        </div>
+        <div class="text-white border-l border-white/20">
+          <p class="text-[10px] text-white/70">ปิดรับสมัครและเอกสาร</p>
+          <p class="font-bold text-sm text-[#D4E858]">วันที่ 11 ธันวาคม 2569 เวลา 16.00น.</p>
+        </div>
+        <div class="text-white border-l border-white/20">
+          <p class="text-[10px] text-white/70">ขนาดเริ่มต้น</p>
+          <p class="font-bold text-sm">3x3 เมตร</p>
+        </div>
+        <div class="text-white border-l border-white/20">
+          <p class="text-[10px] text-white/70">ส่งเอกสารทาง</p>
+          <p class="font-bold text-sm">LINE: PMKUF</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ================= END LANDING PAGE ================= -->
+
+  <!-- ==============================
+       ส่วนที่ 2: แบบฟอร์ม
+  =============================== -->
+  <div id="formView" class="hidden-section min-h-[100dvh] pt-6 md:pt-24 pb-20 px-4 md:px-10">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 md:gap-8">
+      
+      <!-- Sidebar / Menu -->
+      <div class="w-full md:w-[300px] shrink-0 space-y-4 md:space-y-6 relative z-40">
+        <h2 class="text-2xl md:text-4xl font-bold text-[#b1c33c] hidden md:block">ทุกขั้นตอน</h2>
+        
+        <div class="bg-[#114035] rounded-2xl md:rounded-3xl p-4 md:p-6 text-white shadow-xl relative">
+          
+          <div class="flex justify-between items-center mb-4 text-xs font-bold text-gray-400">
+            <span>APPLICATION ROUTE</span>
+            <span class="bg-white/10 px-2 py-1 rounded-full"><span id="stepCounter">1</span>/5</span>
+          </div>
+
+          <!-- ==========================================
+               แถบแสดงชื่อโซน (แทรกใต้ APPLICATION ROUTE)
+          =========================================== -->
+          <div class="mb-4 md:mb-6 bg-white/10 border border-[#D4E858]/30 rounded-xl p-3 backdrop-blur-sm">
+            <div class="flex items-start gap-2">
+              <span class="text-[#D4E858] text-lg mt-0.5">⚡️</span>
+              <div>
+                <div class="text-[#D4E858] text-[10px] md:text-xs font-bold mb-0.5">งานเกษตรแฟร์ 2570</div>
+                <div class="text-sm md:text-base font-bold text-white leading-tight">
+                  โซน F : สถานีเติมพลัง
+                </div>
+                <div class="text-xs text-gray-300 mt-0.5">
+                  (Boost Energy Station)
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ========================================== -->
+
+          <!-- Progress Bar สำหรับมือถือ -->
+          <div class="md:hidden mt-3">
+            <div class="w-full bg-black/30 rounded-full h-2">
+              <div id="mobileProgress" class="bg-[#D4E858] h-2 rounded-full transition-all duration-300" style="width: 20%"></div>
+            </div>
+            <div id="mobileStepText" class="text-right text-xs mt-2 text-[#D4E858] font-semibold">ขั้นตอนที่ 1: ข้อตกลง</div>
+          </div>
+
+          <!-- เมนูสเต็ป สำหรับ Desktop -->
+          <div class="space-y-2 hidden md:block">
+            <div id="nav-step1" class="step-nav active flex items-center gap-4 p-3 rounded-2xl bg-white text-[#0E5143] transition"><div class="w-8 h-8 rounded-full bg-[#D4E858] flex items-center justify-center font-bold text-sm">01</div><div><div class="font-bold text-sm">ข้อตกลง</div><div class="text-xs opacity-70">TOR และ PDPA</div></div></div>
+            <div id="nav-step2" class="step-nav flex items-center gap-4 p-3 rounded-2xl text-gray-400 transition"><div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center font-bold text-sm">02</div><div><div class="font-bold text-sm">ข้อมูลผู้สมัคร</div><div class="text-xs opacity-70">ข้อมูลติดต่อ</div></div></div>
+            <div id="nav-step3" class="step-nav flex items-center gap-4 p-3 rounded-2xl text-gray-400 transition"><div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center font-bold text-sm">03</div><div><div class="font-bold text-sm">สินค้า</div><div class="text-xs opacity-70">รายการที่จำหน่าย</div></div></div>
+            <div id="nav-step4" class="step-nav flex items-center gap-4 p-3 rounded-2xl text-gray-400 transition"><div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center font-bold text-sm">04</div><div><div class="font-bold text-sm">พื้นที่</div><div class="text-xs opacity-70">โซนและไฟฟ้า</div></div></div>
+            <div id="nav-step5" class="step-nav flex items-center gap-4 p-3 rounded-2xl text-gray-400 transition"><div class="w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center font-bold text-sm">05</div><div><div class="font-bold text-sm">ส่งใบสมัคร</div><div class="text-xs opacity-70">ตรวจสอบเอกสาร</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Form Area -->
+      <div class="flex-1 relative">
+        <form id="applyForm" novalidate onsubmit="submitForm(event)" class="h-full flex flex-col">
+          <div class="bg-white rounded-t-[2rem] md:rounded-[2rem] shadow-lg border border-gray-100 flex flex-col flex-1 mb-20 md:mb-0">
+            <div class="h-2 w-full flex rounded-t-[2rem] overflow-hidden"><div class="w-1/3 bg-[#0E5143]"></div><div class="w-1/3 bg-[#D4E858]"></div><div class="w-1/3 bg-teal-600"></div></div>
+            
+            <div class="p-6 md:p-12 flex-1">
+              
+              <!-- ==== STEP 1 : ข้อตกลง ==== -->
+              <div id="section1" class="form-section block space-y-4 md:space-y-6">
+                <div class="text-xs font-bold text-gray-400 tracking-wider mb-1">— STEP 01</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[#0E5143] mb-2">อ่านและยอมรับข้อตกลง</h3>
+                
+         <!-- Viewer แสดงรูป TOR 5 หน้า -->
+                <div class="border border-gray-200 rounded-2xl p-4 bg-[#F8FBF9] mt-4 space-y-3">
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xl">📄</span>
+                      <h4 class="font-bold text-gray-800 text-sm md:text-base">รายละเอียด TOR โซน F (5 หน้า)</h4>
+                    </div>
+                    <span class="text-xs font-bold text-[#0E5143] bg-[#D4E858] px-3 py-1 rounded-full" id="torPageNum">หน้า 1/5</span>
+                  </div>
+
+                  <!-- กรอบแสดงรูปภาพ -->
+                  <div class="relative bg-gray-100 rounded-xl overflow-hidden border border-gray-300 shadow-inner group min-h-[350px] md:min-h-[500px] flex items-center justify-center">
+                    
+                    <!-- รูปหน้าแรก (เพิ่ม cursor-zoom-in และ onclick) -->
+                    <img id="torImage" src="https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/Final%20-%20TOR%20%E0%B9%82%E0%B8%8B%E0%B8%99%20F%202570-1.png?raw=true" class="w-full h-auto max-h-[600px] object-contain transition-all duration-300 cursor-zoom-in hover:opacity-90" onclick="openTorModal()" alt="TOR Page">
+
+                    <!-- ปุ่มเลื่อน ซ้าย - ขวา -->
+                    <button type="button" onclick="prevTorPage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10">❮</button>
+                    <button type="button" onclick="nextTorPage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10">❯</button>
+                  </div>
+
+                  <p class="text-xs text-center text-gray-500">💡 กดที่รูปเพื่อขยาย หรือกดปุ่มลูกศร ❮ ❯ เพื่ออ่านหน้าถัดไป</p>
+                </div>
+
+                <!-- PDPA -->
+                <div class="border border-gray-200 rounded-2xl p-4 md:p-5 flex flex-col sm:flex-row gap-4 bg-[#F8FBF9]">
+                  <div class="bg-teal-100 text-teal-700 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0">🛡️</div>
+                  <div>
+                    <h4 class="font-bold text-gray-800">การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</h4>
+                    <p class="text-xs text-gray-500 mt-1 mb-2">สำนักงานบริหารทรัพย์สิน จำเป็นต้องเก็บรวบรวมข้อมูลเพื่อการพิจารณา</p>
+                    <!-- แก้ไขลิงก์ PDPA -->
+                    <a href="https://kasets.art/pWhTiN" target="_blank" class="text-sm font-bold text-teal-700 hover:underline">อ่านนโยบายฉบับเต็ม →</a>
+                  </div>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="space-y-3 pt-4">
+                  <label class="flex items-start gap-4 p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50">
+                    <div class="mt-1"><input type="checkbox" id="checkTOR" onchange="validateStep1()" class="w-5 h-5 accent-[#0E5143]"></div>
+                    <span class="text-sm text-gray-700 leading-relaxed">ข้าพเจ้าได้อ่านและเข้าใจรายละเอียด TOR โซน F เรียบร้อยแล้ว</span>
+                  </label>
+                  <label class="flex items-start gap-4 p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50">
+                    <div class="mt-1"><input type="checkbox" id="checkPDPA" onchange="validateStep1()" class="w-5 h-5 accent-[#0E5143]"></div>
+                    <span class="text-sm text-gray-700 leading-relaxed">ข้าพเจ้ายินยอมให้เก็บรวบรวมและใช้ข้อมูลส่วนบุคคล (PDPA)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- ==== STEP 2 : ข้อมูลผู้สมัคร ==== -->
+              <div id="section2" class="form-section hidden-section space-y-4 md:space-y-6">
+                <div class="text-xs font-bold text-gray-400 tracking-wider mb-1">— STEP 02</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[#0E5143] mb-2">ข้อมูลผู้สมัคร</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
+                  <!-- 1. อีเมล -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2">อีเมล (ใช้ส่งยืนยันผล) <span class="text-red-500">*</span></label>
+                    <input type="email" name="email" required placeholder="example@email.com" class="w-full border p-3.5 rounded-xl focus:ring-2 focus:ring-[#0E5143] outline-none text-base md:text-sm bg-gray-50 focus:bg-white">
+                  </div>
+
+                  <!-- 2. ชื่อ-นามสกุล -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2">ชื่อ-นามสกุล <span class="text-red-500">*</span></label>
+                    <input type="text" name="fullname" required placeholder="นายกกก ขข" class="w-full border p-3.5 rounded-xl focus:ring-2 focus:ring-[#0E5143] outline-none text-base md:text-sm bg-gray-50 focus:bg-white">
+                  </div>
+
+                  <!-- 3. บริษัท / ห้างหุ้นส่วน -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2">บริษัท / ห้างหุ้นส่วน (ถ้ามี)</label>
+                    <input type="text" name="company" placeholder="บริษัทกกกก จำกัด" class="w-full border p-3.5 rounded-xl focus:ring-2 focus:ring-[#0E5143] outline-none text-base md:text-sm bg-gray-50 focus:bg-white">
+                  </div>
+
+                  <!-- 4. สมัครในนาม (บุคคลธรรมดา / นิติบุคคล) -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2">สมัครในนาม <span class="text-red-500">*</span></label>
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                      <label class="flex items-center gap-2 cursor-pointer text-sm">
+                        <input type="radio" name="applicantType" value="บุคคลธรรมดา" checked class="accent-[#0E5143] w-4 h-4">
+                        <span>บุคคลธรรมดา</span>
+                      </label>
+                      <label class="flex items-center gap-2 cursor-pointer text-sm">
+                        <input type="radio" name="applicantType" value="นิติบุคคล (บริษัท/ห้างร้าน)" class="accent-[#0E5143] w-4 h-4">
+                        <span>นิติบุคคล (บริษัท/ห้างร้าน)</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- 5. เบอร์โทรศัพท์ -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2">เบอร์โทรศัพท์ <span class="text-red-500">*</span></label>
+                    <input type="tel" name="phone" required placeholder="08555555555" class="w-full border p-3.5 rounded-xl focus:ring-2 focus:ring-[#0E5143] outline-none text-base md:text-sm bg-gray-50 focus:bg-white">
+                  </div>
+
+                  <!-- 6. LINE ID -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2">LINE ID <span class="text-red-500">*</span></label>
+                    <input type="text" name="line" required placeholder="somchai_line" class="w-full border p-3.5 rounded-xl focus:ring-2 focus:ring-[#0E5143] outline-none text-base md:text-sm bg-gray-50 focus:bg-white">
+                  </div>
+
+                  <!-- 7. ที่อยู่ออกใบเสร็จ -->
+                  <div class="md:col-span-2">
+                    <label class="block text-sm font-bold mb-1">ที่อยู่ออกใบเสร็จ (หากได้รับสิทธิ์)</label>
+                    <p class="text-xs text-amber-700 font-medium mb-2">⚠️ หากออกในนามบริษัทต้องระบุเหตุผลให้ชัดเจน</p>
+                    <textarea name="address" rows="3" placeholder="บริษัทกกกก จำกัด&#10;ที่อยู่ 123/45 ถนน... แขวง... เขต... กทม. 10900&#10;เลขผู้เสียภาษี 0105550000000" class="w-full border p-3.5 rounded-xl focus:ring-2 focus:ring-[#0E5143] outline-none text-base md:text-sm bg-gray-50 focus:bg-white"></textarea>
+                  </div>
+                </div>
+              </div>
+
+            <!-- ==== STEP 3 : สินค้า ==== -->
+              <div id="section3" class="form-section hidden-section space-y-4 md:space-y-6">
+                <div class="text-xs font-bold text-gray-400 tracking-wider mb-1">— STEP 03</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[#0E5143] mb-2">สินค้าและโปรโมชั่น</h3>
+
+                <div class="mt-4 space-y-6">
+                  
+                  <!-- 1. เลือกประเภทสินค้า -->
+                  <div class="bg-amber-50/60 border border-amber-200/80 p-4 rounded-2xl space-y-3">
+                    <label class="block text-sm font-bold text-amber-900">
+                      เลือกประเภทสินค้า <span class="text-red-500">*</span>
+                    </label>
+                    <p class="text-xs text-amber-700">
+                      ⚠️ <strong>เงื่อนไขสำคัญ:</strong> สินค้าทั้งหมดต้องอยู่ในประเภทเดียวกันเท่านั้น ห้ามระบุปะปนกันในการพิจารณา
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                      <label class="flex items-center gap-3 p-3 bg-white border border-amber-200 rounded-xl cursor-pointer hover:border-[#0E5143] transition shadow-sm">
+                        <input type="radio" name="productCategory" value="สินค้าบริโภค (ของกิน/เครื่องดื่ม)" required class="accent-[#0E5143] w-4 h-4">
+                        <div>
+                          <div class="font-bold text-sm text-gray-800">🍱 สินค้าบริโภค</div>
+                          <div class="text-xs text-gray-500">ของกิน, เครื่องดื่ม, ขนม</div>
+                        </div>
+                      </label>
+
+                      <label class="flex items-center gap-3 p-3 bg-white border border-amber-200 rounded-xl cursor-pointer hover:border-[#0E5143] transition shadow-sm">
+                        <input type="radio" name="productCategory" value="สินค้าอุปโภค (ของใช้/ไลฟ์สไตล์)" class="accent-[#0E5143] w-4 h-4">
+                        <div>
+                          <div class="font-bold text-sm text-gray-800">🛍️ สินค้าอุปโภค</div>
+                          <div class="text-xs text-gray-500">ของใช้, เสื้อผ้า, เครื่องประดับ</div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- 2. สินค้าที่จำหน่าย (กล่องเดียว) -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-800">
+                      สินค้าที่นำมาจำหน่าย (ไม่เกิน 5 รายการ) <span class="text-red-500">*</span>
+                    </label>
+                    <textarea name="products" id="productItems" required rows="5" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. " class="w-full border p-3.5 rounded-xl outline-none focus:ring-2 focus:ring-[#0E5143] text-base md:text-sm bg-gray-50 focus:bg-white leading-relaxed"></textarea>
+                  </div>
+
+                  <!-- 3. โปรโมชั่นร้านค้า -->
+                  <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-800">โปรโมชั่นร้านค้า (ถ้ามี)</label>
+                    <textarea name="promotions" rows="2" placeholder="ระบุโปรโมชั่น เช่น ซื้อ 2 แถม 1 / ลด 10%" class="w-full border p-3.5 rounded-xl outline-none focus:ring-2 focus:ring-[#0E5143] text-base md:text-sm bg-gray-50 focus:bg-white"></textarea>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ==== STEP 4 : พื้นที่ & ไฟฟ้า ==== -->
+              <div id="section4" class="form-section hidden-section space-y-4 md:space-y-6">
+                <div class="text-xs font-bold text-gray-400 tracking-wider mb-1">— STEP 04</div>
+                <h3 class="text-2xl md:text-3xl font-bold text-[#0E5143] mb-2">พื้นที่และไฟฟ้า</h3>
+
+                <div class="space-y-6 mt-4">
+                  <!-- เลือกโซน -->
+                  <div>
+                    <div class="mb-3">
+                      <label class="block text-sm font-bold">เลือกอัตราค่าใช้พื้นที่ <span class="text-red-500">*</span></label>
+                    </div>
+
+                    <!-- === จุดสำหรับใส่รูปภาพแผนที่โซน === -->
+                    <div class="mb-4 border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                       <img src="https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/%E0%B8%AD%E0%B8%B1%E0%B8%95%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%20F%202570.png?raw=true" alt="อัตราค่าใช้พื้นที่" class="w-full h-auto object-cover">
+                    </div>
+                    <!-- ================================== -->
+
+                    <div class="space-y-3 text-sm">
+                      <label class="flex items-start md:items-center gap-3 p-3.5 border rounded-xl cursor-pointer hover:bg-gray-50">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="zone" value="โซน F1 ขนาดพื้นที่ กว้าง 8 เมตร ลึก 4 เมตร ราคา 40,000 บาท" required onchange="handleZoneChange()" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">โซน F1 ขนาดพื้นที่ กว้าง 8 เมตร ลึก 4 เมตร ราคา 40,000 บาท</span>
+                      </label>
+                      <label class="flex items-start md:items-center gap-3 p-3.5 border rounded-xl cursor-pointer hover:bg-gray-50">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="zone" value="โซน F2  ขนาดพื้นที่ กว้าง 4 เมตร ลึก 2 เมตร ราคา 15,000 บาท" onchange="handleZoneChange()" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">โซน F2 ขนาดพื้นที่ กว้าง 4 เมตร ลึก 2 เมตร ราคา 15,000 บาท</span>
+                      </label>
+                      <label class="flex items-start md:items-center gap-3 p-3.5 border rounded-xl cursor-pointer hover:bg-gray-50">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="zone" value="โซน F2 (FOOD TRUCK)  ขนาดพื้นที่ กว้าง 10 เมตร ลึก 2 เมตร ราคา 15,000 บาท" onchange="handleZoneChange()" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">โซน F2 (FOOD TRUCK) ขนาดพื้นที่ กว้าง 10 เมตร ลึก 2 เมตร ราคา 15,000 บาท</span>
+                      </label>
+                      <label class="flex items-start md:items-center gap-3 p-3.5 border rounded-xl cursor-pointer hover:bg-gray-50">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="zone" value="โซน F3 ขนาดพื้นที่ กว้าง 3 เมตร ลึก 3 เมตร ราคา 15,000 บาท" onchange="handleZoneChange()" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">โซน F3 ขนาดพื้นที่ กว้าง 3 เมตร ลึก 3 เมตร ราคา 15,000 บาท</span>
+                      </label>
+                      <label class="flex items-start md:items-center gap-3 p-3.5 border rounded-xl cursor-pointer bg-yellow-50/50">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="zone" id="specialZone" value="(พื้นที่พิเศษ) โซน F2 ขนาดพื้นที่ กว้าง 8 เมตร ลึก 8 เมตร ยื่นเสนอราคา" onchange="handleZoneChange()" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="font-bold text-[#0E5143] leading-snug">(พื้นที่พิเศษ) โซน F2 ขนาดพื้นที่ กว้าง 8 เมตร ลึก 8 เมตร ยื่นเสนอราคา</span>
+                      </label>
+                    </div>
+                    <!-- กล่องใส่ราคาเสนอ -->
+                    <div id="priceBox" class="mt-3 hidden pl-1 md:pl-8">
+                      <label class="block text-sm font-bold text-gray-700">ระบุราคาเสนอ (ไม่ต่ำกว่า 37,000 บาท) <span class="text-red-500">*</span></label>
+                      <input type="number" id="proposedPrice" name="proposedPrice" min="37000" class="w-full md:w-1/2 border p-3 rounded-lg mt-2 outline-none focus:ring-2 focus:ring-[#0E5143] text-base bg-gray-50 focus:bg-white" placeholder="เช่น 40000">
+                    </div>
+                  </div>
+
+                  <!-- จำนวนล็อกที่ต้องการสมัคร -->
+                  <div>
+                    <label class="block text-sm font-bold mb-3">จำนวนล็อกที่ต้องการสมัคร <span class="text-red-500">*</span></label>
+                    <p class="text-xs text-red-600 mb-3 bg-red-50 p-2 rounded-lg">* เลือกได้ 2 ล็อกเฉพาะ โซน F2 (ขนาด 4x2 ม.) และ โซน F3 เท่านั้น</p>
+                    <div class="flex gap-4">
+                      <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="lockCount" value="1" checked required class="accent-[#0E5143] w-4 h-4">
+                        <span class="text-sm">1 ล็อก</span>
+                      </label>
+                      <label id="twoLockLabel" class="flex items-center gap-2 cursor-pointer opacity-50">
+                        <input type="radio" name="lockCount" id="lock2" value="2" disabled class="accent-[#0E5143] w-4 h-4">
+                        <span class="text-sm">2 ล็อก</span>
+                      </label>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- ไฟฟ้า -->
+                  <div>
+                    <div class="bg-orange-50 border border-orange-200 p-4 rounded-xl mb-4 text-sm text-gray-700 leading-relaxed shadow-sm">
+                      <strong class="text-orange-700 block mb-1">⚠️ คำเตือนเรื่องกระแสไฟฟ้า</strong>
+                      เนื่องจากไฟฟ้าภายในงานมีไฟฟ้าดับ หรือตกบ่อยครั้ง จากการใช้ไฟฟ้าพร้อมๆกัน ทั้งนี้ร้านค้าจะต้องป้องกันไฟฟ้ากระชาก อุปกรณ์ป้องกันไฟกระชาก เครื่องสำรองไฟฟ้า และอื่นๆ ทางร้านค้าโปรดเตรียมการป้องกันการใช้เครื่องใช้ไฟฟ้าของท่าน โดยทางโซน F สถานีเติมพลัง (Boost Energy Station) จะไม่รับผิดชอบต่อการสูญหาย หรือเสียหายทุกประการ 
+                    </div>
+
+                    <label class="block text-sm font-bold mb-3">ค่าสาธารณูปโภค (กระแสไฟฟ้า) <span class="text-red-500">*</span></label>
+                    
+                    <!-- รูปอธิบายค่าไฟ -->
+                    <div class="mb-4 border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                       <img src="https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/%E0%B9%84%E0%B8%9F%E0%B8%9F%E0%B9%89%E0%B8%B2%202569.jpg?raw=true" alt="อัตราค่าใช้กระแสไฟฟ้า" class="w-full h-auto object-cover">
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                      <label class="flex items-start md:items-center gap-3 p-2 border border-transparent hover:border-gray-200 rounded-lg cursor-pointer transition">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="electricity" value="เหมาจ่ายเป็นเงิน 1,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 1,000 วัตต์ (5A)" required class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">เหมาจ่ายเป็นเงิน 1,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 1,000 วัตต์ (5A)</span>
+                      </label>
+                      <label class="flex items-start md:items-center gap-3 p-2 border border-transparent hover:border-gray-200 rounded-lg cursor-pointer transition">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="electricity" value="เหมาจ่ายเป็นเงิน 2,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 2,000 วัตต์ (10A)" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">เหมาจ่ายเป็นเงิน 2,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 2,000 วัตต์ (10A)</span>
+                      </label>
+                      <label class="flex items-start md:items-center gap-3 p-2 border border-transparent hover:border-gray-200 rounded-lg cursor-pointer transition">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="electricity" value="เหมาจ่ายเป็นเงิน 3,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 3,000 วัตต์ (15A)" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">เหมาจ่ายเป็นเงิน 3,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 3,000 วัตต์ (15A)</span>
+                      </label>
+                      <label class="flex items-start md:items-center gap-3 p-2 border border-transparent hover:border-gray-200 rounded-lg cursor-pointer transition">
+                        <div class="mt-0.5 md:mt-0"><input type="radio" name="electricity" value="เหมาจ่ายเป็นเงิน 5,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 3,000 - 5,000 วัตต์ (30A)" class="accent-[#0E5143] w-4 h-4"></div> 
+                        <span class="leading-snug">เหมาจ่ายเป็นเงิน 5,000 บาทตลอดทั้งงาน  อุปกรณ์ไฟฟ้าไม่เกิน 3,000 - 5,000 วัตต์ (30A)</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-bold mb-2">ระบุเครื่องใช้ไฟฟ้าภายในล็อค <span class="text-red-500">*</span></label>
+                    <textarea name="appliances" required rows="2" class="w-full border p-3.5 rounded-xl outline-none focus:ring-2 focus:ring-[#0E5143] text-base md:text-sm bg-gray-50 focus:bg-white" placeholder="เช่น พัดลม 2 ตัว "></textarea>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- ==== STEP 5 : ตรวจสอบและส่งเอกสาร ==== -->
+              <div id="section5" class="form-section hidden-section space-y-6">
+                <div>
+                  <div class="text-xs font-bold text-gray-400 tracking-wider mb-1">— STEP 05</div>
+                  <h3 class="text-2xl md:text-3xl font-bold text-[#0E5143]">ตรวจสอบและส่งเอกสาร</h3>
+                </div>
+
+                <!-- 4. สรุปประมาณรายการค่าใช้จ่าย -->
+                <div class="bg-green-50 border border-green-200 rounded-xl p-5 shadow-sm">
+                  <h4 class="text-lg font-bold text-[#0E5143] mb-3 border-b border-green-200 pb-2">📋 สรุปประมาณรายการค่าใช้จ่าย</h4>
+                  <div class="space-y-3 text-sm text-gray-800">
+                    <div class="flex flex-col md:flex-row justify-between gap-1">
+                      <span class="text-gray-600">โซนที่เลือก:</span> 
+                      <span id="summaryZone" class="font-semibold md:text-right">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-600">อัตราค่าพื้นที่:</span> 
+                      <span class="font-semibold"><span id="summaryAreaPrice">0</span> บาท</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-600">ค่าสาธารณูปโภค (ค่าไฟฟ้า):</span> 
+                      <span class="font-semibold"><span id="summaryElecPrice">0</span> บาท</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-600">ค่าสมัคร:</span> 
+                      <span class="font-semibold">500 บาท</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t border-green-200 mt-2 text-base">
+                      <span class="font-bold text-[#0E5143]">ยอดรวมโดยประมาณ:</span> 
+                      <span class="font-bold text-xl text-red-600"><span id="summaryTotalPrice">0</span> บาท</span>
+                    </div>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-4 leading-relaxed bg-white p-3 rounded-lg border border-gray-100">
+                    <span class="text-red-500 font-bold">* หมายเหตุ:</span> ยอดประมาณการดังกล่าวคำนวณจากข้อมูลที่ท่านกรอกเท่านั้น ค่าใช้จ่ายจริงจะชำระ <strong class="text-gray-700">ต่อเมื่อมีรายชื่อผู้ผ่านการพิจารณาคัดเลือกในวันที่ 11 ธันวาคม 2569 แล้วเท่านั้น</strong> ถึงจะมีการส่งใบแจ้งชำระเงินผ่านไลน์ที่ท่านได้แจ้งไว้
+                  </p>
+                </div>
+
+                <!-- คำเตือน โปรดระวังมิจฉาชีพหลอกโอนเงิน -->
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 md:p-5 rounded-r-xl shadow-sm">
+                  <h4 class="text-base md:text-lg font-bold text-red-700 mb-2 flex items-center gap-2">
+                    🚨 คำเตือน โปรดระวังมิจฉาชีพหลอกโอนเงิน
+                  </h4>
+                  <div class="text-sm md:text-base text-gray-800 leading-relaxed space-y-1">
+                    <p>งานเกษตรแฟร์โซน F ประจำปี 2570 </p>
+                    <p>ช่องทางชำระค่าใช้จ่ายสำหรับผู้เข้าร่วมจำหน่ายสินค้าในงานเกษตรแฟร์ ปี 2570</p>
+                    <p class="font-bold text-red-600 bg-red-100 inline-block px-2 py-1 rounded mt-1 mb-1">
+                      ชำระผ่าน QR CODE โอนเข้าบัญชี "มหาวิทยาลัยเกษตรศาสตร์" เท่านั้น
+                    </p>
+                    <p class="font-semibold">โปรดชำระเงินเฉพาะเมื่อมีรายชื่อผู้ได้รับสิทธิ์ในวันที่ 16 ธันวาคม 2569 แล้วเท่านั้น</p>
+                  </div>
+                </div>
+
+                <!-- 1. ข้อจำกัดและข้อควรทราบในการใช้พื้นที่โซน F -->
+                <div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                  <h4 class="text-base font-bold text-gray-800 mb-4">⚠️ 1. ข้อจำกัดและข้อควรทราบในการใช้พื้นที่โซน F</h4>
+                  
+                <!-- จุดสำหรับใส่รูปประกอบข้อจำกัด -->
+                  <div class="mb-4 border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                    <!-- นำลิงก์ GitHub ที่ลงท้ายด้วย ?raw=true มาใส่ใน src ด้านล่างนี้ -->
+                    <img src="https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%88%E0%B8%B3%E0%B8%81%E0%B8%B1%E0%B8%94%E0%B8%94%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87.png?raw=true" alt="รูปประกอบข้อจำกัดพื้นที่" class="w-full h-auto object-cover">
+                  </div>
+
+                  <ul class="space-y-3 text-sm text-gray-700 list-none pl-1">
+                    <li class="flex items-start gap-2"><span class="text-[#0E5143] font-bold">•</span> <span><strong>สภาพพื้นที่:</strong> พื้นที่บางล็อกอาจมีสิ่งกีดขวางหรือข้อจำกัดทางกายภาพ เช่น ต้นไม้ เครื่องเล่น หรือสิ่งติดตั้งอื่น ๆ ภายในพื้นที่</span></li>
+                    <li class="flex items-start gap-2"><span class="text-[#0E5143] font-bold">•</span> <span><strong>ขนาดพื้นที่:</strong> ขนาดพื้นที่จริงของแต่ละล็อกอาจมีความคลาดเคลื่อนจากขนาดที่ระบุไว้ เนื่องจากข้อจำกัดด้านพื้นที่และระยะความกว้าง–ความยาว</span></li>
+                    <li class="flex items-start gap-2"><span class="text-[#0E5143] font-bold">•</span> <span><strong>ตำแหน่งเสาสแลน:</strong> เสาสำหรับติดตั้งสแลนกันแดดอาจตั้งอยู่บริเวณด้านข้างหรือภายในล็อก โดยต้องเว้นระยะตามข้อกำหนดด้านความปลอดภัย ทั้งนี้ ไม่สามารถระบุตำแหน่งที่แน่นอนได้ล่วงหน้า</span></li>
+                    <li class="flex items-start gap-2"><span class="text-[#0E5143] font-bold">•</span> <span><strong>ระบบไฟฟ้าและการดูแลทรัพย์สิน:</strong> ระบบไฟฟ้าภายในงานอาจเกิดไฟฟ้าดับหรือแรงดันไฟฟ้าตก เนื่องจากมีการใช้กระแสไฟฟ้าพร้อมกันเป็นจำนวนมาก ผู้ประกอบการควรเตรียมอุปกรณ์ป้องกันความเสียหายจากกระแสไฟฟ้า เช่น อุปกรณ์ป้องกันไฟกระชาก (Surge Protector) หรือเครื่องสำรองไฟฟ้า (UPS) ให้เหมาะสมกับอุปกรณ์ของตนเอง ทั้งนี้ โซน F สถานีเติมพลัง (Boost Energy Station) จะไม่รับผิดชอบต่อความสูญหายหรือความเสียหายของสินค้า อุปกรณ์ และทรัพย์สินของผู้ประกอบการ รวมถึงกรณีทรัพย์สินสูญหายระหว่างการจัดงาน</span></li>
+                    <li class="flex items-start gap-2"><span class="text-[#0E5143] font-bold">•</span> <span><strong>การปรับเปลี่ยนพื้นที่:</strong> ผู้ประกอบการต้องปฏิบัติตามคำแนะนำและข้อกำหนดของเจ้าหน้าที่ รวมถึงยินยอมปรับเปลี่ยนการจัดวางหรือการใช้พื้นที่ตามความเหมาะสม เพื่อความปลอดภัยและความเป็นระเบียบเรียบร้อยภายในงาน</span></li>
+                  </ul>
+                </div>
+
+                <!-- 2. เอกสารประกอบการยื่นสมัคร -->
+                <div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                  <h4 class="text-base font-bold text-gray-800 mb-4">📄 2. เอกสารประกอบการยื่นสมัคร</h4>
+                  
+                  <div class="mb-5 bg-gray-50 p-4 rounded-lg">
+                    <h5 class="font-bold text-[#0E5143] mb-2">2.1 เอกสารสำหรับบุคคลธรรมดา</h5>
+                    <ul class="space-y-1.5 text-sm text-gray-700 list-decimal pl-5">
+                      <li>สำเนาบัตรประจำตัวประชาชน พร้อมลงนามรับรองสำเนาถูกต้อง</li>
+                      <li>รูปถ่ายสินค้า พร้อมระบุราคาสินค้าแต่ละรายการ รูปแบบการตกแต่งร้าน และ/หรือเอกสารประชาสัมพันธ์สินค้า</li>
+                      <li>รูปถ่ายเครื่องใช้ไฟฟ้าหรืออุปกรณ์ไฟฟ้าที่จำเป็นต้องใช้ภายในร้านเพื่อประกอบกิจการ</li>
+                      <li>เอกสารประกอบการสมัครเพิ่มเติมตามประเภทธุรกิจ (ถ้ามี)</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <h5 class="font-bold text-[#0E5143] mb-2">2.2 เอกสารสำหรับนิติบุคคล</h5>
+                    <ul class="space-y-1.5 text-sm text-gray-700 list-decimal pl-5">
+                      <li>สำเนาหนังสือรับรองการจดทะเบียนนิติบุคคลและวัตถุประสงค์ พร้อมลงนามรับรองสำเนาถูกต้อง</li>
+                      <li>รูปถ่ายสินค้า พร้อมระบุราคาสินค้าแต่ละรายการ รูปแบบการตกแต่งร้าน และ/หรือเอกสารประชาสัมพันธ์สินค้า</li>
+                      <li>รูปถ่ายเครื่องใช้ไฟฟ้าหรืออุปกรณ์ไฟฟ้าที่จำเป็นต้องใช้ภายในร้านเพื่อประกอบกิจการ</li>
+                      <li>สำเนาหนังสือรับรองการเสียภาษีของนิติบุคคล ประจำปี พ.ศ. 2568 หรือ พ.ศ. 2569</li>
+                      <li>หนังสือมอบอำนาจ พร้อมติดอากรแสตมป์ 30 บาท (กรณีมอบอำนาจให้บุคคลอื่นดำเนินการแทน)</li>
+                      <li>สำเนาบัตรประจำตัวประชาชนของผู้มอบอำนาจและผู้รับมอบอำนาจ พร้อมลงนามรับรองสำเนาถูกต้อง (กรณีมอบอำนาจ)</li>
+                      <li>ใบอนุญาตจำหน่ายสินค้าลิขสิทธิ์หรือสินค้าที่ใช้เครื่องหมายการค้า (กรณีจำหน่ายสินค้าประเภทดังกล่าว)</li>
+                      <li>เอกสารประกอบการสมัครเพิ่มเติมตามประเภทธุรกิจ (ถ้ามี)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- 3. ช่องทางและกำหนดส่งเอกสาร -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5 shadow-sm text-center">
+                  <h4 class="text-base font-bold text-yellow-800 mb-2">📲 3. ช่องทางและกำหนดส่งเอกสาร</h4>
+                  <p class="text-sm text-gray-800 mb-3">ผู้สมัครสามารถจัดส่งเอกสารประกอบการสมัครผ่านทาง LINE Official Account</p>
+                  <div class="inline-block bg-white border-2 border-green-500 rounded-xl px-6 py-3 font-bold text-lg text-green-600 mb-3 shadow-sm">
+                    LINE ID: pmkuf
+                  </div>
+                  <p class="text-sm font-bold text-red-600 mb-2">กำหนดส่งเอกสารภายในวันที่ 11 ธันวาคม 2569 เวลา 16.00 น.</p>
+                  <p class="text-xs text-gray-600 leading-relaxed max-w-lg mx-auto">
+                    * โปรดตรวจสอบความถูกต้องและความครบถ้วนของเอกสารก่อนจัดส่ง เพื่อประกอบการพิจารณาคัดเลือกร้านค้าเข้าร่วมงานเกษตรแฟร์ หากไม่ส่งตามระยะเวลาที่กำหนดจักถือว่าท่านสละสิทธิ์
+                  </p>
+                </div>
+
+                <!-- Checkbox ยอมรับเงื่อนไขก่อนส่ง -->
+                <div class="mt-6">
+                  <label class="flex items-start gap-3 p-4 border-2 border-gray-200 bg-white rounded-xl cursor-pointer hover:border-[#0E5143] hover:bg-green-50 transition shadow-sm">
+                    <div class="mt-0.5"><input type="checkbox" id="acceptFinalRules" required onchange="checkFinalSubmit()" class="accent-[#0E5143] w-5 h-5"></div> 
+                    <span class="text-sm font-bold text-[#0E5143] leading-relaxed">
+                      ข้าพเจ้าได้อ่านและยอมรับข้อจำกัด ข้อควรทราบ รับทราบประมาณการค่าใช้จ่าย พร้อมทั้งจะจัดส่งเอกสารตามกำหนดเวลาที่ระบุไว้ทุกประการ
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+            </div> <!-- ปิด container ของ form section -->
+          </div>
+
+          <!-- Footer Buttons -->
+          <div class="fixed md:static bottom-0 left-0 right-0 bg-white md:bg-gray-50 border-t border-gray-200 p-4 md:p-6 flex justify-between items-center z-50 md:rounded-b-[2rem] shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)] md:shadow-none">
+            <button type="button" id="btnBack" onclick="changeStep(-1)" class="invisible text-gray-500 font-bold text-sm md:text-base py-2 px-2 md:px-0">← ย้อนกลับ</button>
+            
+            <div class="flex items-center gap-3">
+              <p id="step1Warning" class="text-xs text-red-500 font-bold hidden md:block"></p>
+              <button type="button" id="btnNext" onclick="changeStep(1)" disabled class="bg-[#0E5143] hover:bg-[#0a3d32] disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-6 md:px-10 py-3 rounded-full font-bold transition shadow-md text-sm md:text-base disabled:opacity-50">
+                ถัดไป →
+              </button>
+              <!-- ปุ่มส่งใบสมัคร (จะกดได้ก็ต่อเมื่อติ๊ก Checkbox ด้านบนแล้ว) -->
+              <button type="submit" id="btnSubmit" disabled class="hidden disabled:bg-gray-400 disabled:cursor-not-allowed bg-[#0E5143] text-[#D4E858] px-6 md:px-10 py-3 rounded-full font-bold hover:bg-[#114035] transition shadow-lg text-sm md:text-base flex items-center gap-2">
+                <span>ส่งใบสมัคร</span> <span id="spinner" class="hidden animate-spin">⚙️</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- ==========================================
+       หน้าต่างยืนยันการส่งสำเร็จ (Success View)
+  =========================================== -->
+  <div id="successView" class="hidden-section min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 max-w-3xl w-full text-center transform transition-all">
+      
+      <!-- ไอคอนเครื่องหมายถูก -->
+      <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+        <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      
+      <h2 class="text-3xl md:text-4xl font-bold text-[#0E5143] mb-4">ส่งใบสมัครสำเร็จ!</h2>
+      <p class="text-gray-600 mb-8 text-base md:text-lg">
+        ระบบได้รับข้อมูลของท่านและ <span class="font-bold text-[#0E5143]">ส่งอีเมลยืนยัน</span> ไปยังอีเมลที่ท่านระบุไว้เรียบร้อยแล้ว
+      </p>
+      
+      <!-- กล่องแจ้งเตือนส่งเอกสารทาง LINE -->
+      <div class="bg-[#fffaeb] border-2 border-[#D4E858] rounded-2xl p-6 md:p-8 text-left mb-6 shadow-sm">
+        <h3 class="text-xl font-bold text-[#0E5143] mb-4 flex items-center gap-2 border-b border-gray-200 pb-3">
+          <span class="text-2xl">📱</span> อย่าลืม! ส่งเอกสารประกอบการพิจารณา
+        </h3>
+        <p class="text-sm md:text-base text-gray-700 mb-4">
+          กรุณาส่งเอกสารทั้งหมดด้านล่างนี้ ภายในกำหนดเวลา เพื่อประกอบการพิจารณาคัดเลือกร้านค้า:<br>
+          <span class="inline-block mt-2 text-base md:text-lg">📲 <strong>ส่งเอกสารทาง LINE ID : <span class="text-green-600">PMKUF</span></strong> หรือ <a href="https://line.me/ti/p/~PMKUF" target="_blank" class="text-blue-600 underline hover:text-blue-800 break-all">https://line.me/ti/p/~PMKUF</a></span>
+        </p>
+        
+        <!-- รายการเอกสาร -->
+        <ul class="list-disc list-outside text-sm md:text-base text-gray-700 space-y-3 ml-6 mb-4">
+          <li><strong>สำเนาบัตรประจำตัวประชาชน</strong> (กรณีบุคคลธรรมดา) หรือ <strong>สำเนาหนังสือรับรองการจดทะเบียนนิติบุคคล</strong> พร้อมลงนามรับรองสำเนาถูกต้อง</li>
+          <li><strong>รูปถ่ายสินค้า</strong> พร้อมระบุราคาสินค้าแต่ละรายการ และ/หรือ <strong>รูปแบบการตกแต่งร้าน</strong></li>
+          <li><strong>รูปถ่ายเครื่องใช้ไฟฟ้า</strong> หรืออุปกรณ์ไฟฟ้าที่จำเป็นต้องใช้ภายในร้านเพื่อประกอบกิจการ</li>
+          <li><strong>สำเนาหนังสือรับรองการเสียภาษี</strong> ของนิติบุคคล ประจำปี พ.ศ. 2568 หรือ 2569 (ถ้ามี)</li>
+          <li><strong>เอกสารอื่นๆ (ถ้ามี)</strong> เช่น หนังสือมอบอำนาจพร้อมติดอากรแสตมป์, ใบอนุญาตจำหน่ายสินค้าลิขสิทธิ์ เป็นต้น</li>
+        </ul>
+        
+        <div class="bg-yellow-50 text-yellow-800 text-xs md:text-sm p-3 rounded-lg border border-yellow-200 font-bold">
+          * หากไม่ส่งเอกสารตามระยะเวลาที่กำหนดจะถือว่าท่านสละสิทธิ์
+        </div>
+      </div>
+
+      <!-- กล่องเตือนภัยมิจฉาชีพ -->
+      <div class="bg-red-50 border-2 border-red-400 rounded-2xl p-6 md:p-8 text-left mb-8 shadow-sm">
+        <h3 class="text-xl font-bold text-red-600 mb-4 flex items-center gap-2 border-b border-red-200 pb-3">
+          <span class="text-2xl">🚨</span> คำเตือน! โปรดระวังมิจฉาชีพหลอกโอนเงิน
+        </h3>
+        <p class="text-sm md:text-base text-gray-800 mb-3 font-semibold">
+          ช่องทางชำระค่าใช้จ่ายสำหรับผู้เข้าร่วมจำหน่ายสินค้าในงานเกษตรแฟร์ ปี 2570 โซน F
+        </p>
+        <ul class="list-none text-sm md:text-base text-gray-700 space-y-2 mb-0">
+          <li class="flex items-start gap-2">
+            <span class="text-red-500 mt-0.5">👉</span> 
+            <span>ชำระผ่าน QR CODE โอนเข้าบัญชี <strong>"มหาวิทยาลัยเกษตรศาสตร์"</strong> เท่านั้น</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-red-500 mt-0.5">👉</span> 
+            <span>โปรดชำระเงินเฉพาะเมื่อ <strong>"มีรายชื่อผู้ได้รับสิทธิ์"</strong> ในวันที่ 16 ธันวาคม 2569 แล้วเท่านั้น</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ปุ่มกลับหน้าแรก -->
+      <button onclick="resetToHome()" class="bg-[#0E5143] text-[#D4E858] px-10 py-4 rounded-full font-bold hover:bg-[#114035] transition shadow-lg text-lg flex items-center justify-center gap-2 mx-auto w-full md:w-auto">
+        <span>กลับสู่หน้าหลัก</span>
+      </button>
+
+    </div>
+  </div>
+
+<!-- นำ Modal ออกมานอก tag <script> -->
+  <!-- Modal สำหรับขยายรูปแผนที่ -->
+  <div id="mapModal" class="hidden fixed inset-0 z-[999] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-zoom-out opacity-0 transition-opacity duration-300" onclick="closeMapModal()">
+    <button class="absolute top-6 right-6 text-white bg-white/20 hover:bg-red-500 rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold transition">
+      &times;
+    </button>
+    <img id="modalImage" src="https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/1.%20%E0%B8%9C%E0%B8%B1%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99%20(%E0%B8%A3%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%88%E0%B8%B2%E0%B8%81%E0%B8%9B%E0%B8%B5%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%81%E0%B8%A5%E0%B9%89%E0%B8%A7).jpg?raw=true" 
+         class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300" alt="แผนที่ขนาดใหญ่">
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    function startApplication() {
+      document.getElementById('landingView').classList.add('hidden-section');
+      document.getElementById('formView').classList.remove('hidden-section');
+      window.scrollTo(0,0);
+    }
+
+    function togglePriceBox() {
+      const specialZone = document.getElementById('specialZone');
+      const priceBox = document.getElementById('priceBox');
+      const priceInput = document.getElementById('proposedPrice');
+      
+      if (specialZone.checked) {
+        priceBox.classList.remove('hidden');
+        priceInput.required = true;
+      } else {
+        priceBox.classList.add('hidden');
+        priceInput.required = false;
+        priceInput.value = "";
+      }
+    }
+
+    function validateStep1() {
+      const tor = document.getElementById('checkTOR').checked;
+      const pdpa = document.getElementById('checkPDPA').checked;
+      const btnNext = document.getElementById('btnNext');
+      const warning = document.getElementById('step1Warning');
+      
+      if (tor && pdpa) {
+        btnNext.disabled = false;
+        btnNext.classList.replace('bg-gray-400', 'bg-[#D4E858]');
+        btnNext.classList.add('text-[#0E5143]');
+        warning.classList.add('hidden');
+      } else {
+        btnNext.disabled = true;
+        btnNext.classList.replace('bg-[#D4E858]', 'bg-gray-400');
+        btnNext.classList.remove('text-[#0E5143]');
+        warning.classList.remove('hidden');
+      }
+    }
+
+    // ตรวจสอบข้อมูลก่อนไปหน้าถัดไป (รองรับ Radio, Email และราคาขั้นต่ำ)
+    function validateFormStep() {
+      if (currentStep === 1) return true; 
+      
+      const currentSection = document.getElementById(`section${currentStep}`);
+      const inputs = currentSection.querySelectorAll('input[required], textarea[required]');
+      
+      for (let input of inputs) {
+        let isComplete = true;
+        
+        if (input.type === 'radio') {
+          const isChecked = currentSection.querySelector(`input[name="${input.name}"]:checked`);
+          if (!isChecked) isComplete = false;
+        } else {
+          if (!input.value.trim()) isComplete = false;
+        }
+
+        if (!isComplete) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'ข้อมูลไม่ครบถ้วน',
+            text: 'กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย * ให้ครบ',
+            confirmButtonColor: '#0E5143'
+          });
+          if (input.type !== 'radio') input.focus();
+          return false;
+        }
+
+        // เช็ครูปแบบอีเมลให้ถูกต้อง
+        if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'รูปแบบอีเมลไม่ถูกต้อง',
+            text: 'กรุณากรอกอีเมลให้ถูกต้อง เช่น example@email.com',
+            confirmButtonColor: '#0E5143'
+          });
+          input.focus();
+          return false;
+        }
+
+        // เช็คราคาเสนอขั้นต่ำ (กรณีเลือกพื้นที่พิเศษ)
+        if (input.id === 'proposedPrice' && Number(input.value) < 37000) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'ราคาเสนอไม่ถูกต้อง',
+            text: 'กรุณาระบุราคาเสนอไม่ต่ำกว่า 37,000 บาท',
+            confirmButtonColor: '#0E5143'
+          });
+          input.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function changeStep(stepChange) {
+      if (stepChange === 1 && !validateFormStep()) return;
+
+      document.getElementById(`section${currentStep}`).classList.add('hidden-section');
+      currentStep += stepChange;
+      document.getElementById(`section${currentStep}`).classList.remove('hidden-section');
+
+      updateSidebarUI();
+      window.scrollTo(0,0);
+    }
+
+    function updateSidebarUI() {
+      document.getElementById('stepCounter').innerText = currentStep;
+      
+      // Update Mobile Progress
+      const progressPercent = (currentStep / totalSteps) * 100;
+      document.getElementById('mobileProgress').style.width = progressPercent + '%';
+      
+      const stepNames = ["ข้อตกลง", "ข้อมูลผู้สมัคร", "สินค้า", "พื้นที่", "ส่งใบสมัคร"];
+      document.getElementById('mobileStepText').innerText = `ขั้นตอนที่ ${currentStep}: ${stepNames[currentStep-1]}`;
+
+      // Update Desktop Sidebar
+      for (let i = 1; i <= totalSteps; i++) {
+        let nav = document.getElementById(`nav-step${i}`);
+        if(nav) {
+          let numBox = nav.children[0];
+          
+          if (i === currentStep) {
+            nav.className = 'step-nav active flex items-center gap-4 p-3 rounded-2xl bg-white text-[#0E5143] transition shadow-sm';
+            numBox.className = 'w-8 h-8 rounded-full bg-[#D4E858] flex items-center justify-center font-bold text-sm';
+          } else if (i < currentStep) {
+            nav.className = 'step-nav flex items-center gap-4 p-3 rounded-2xl text-white transition';
+            numBox.className = 'w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center font-bold text-sm text-white';
+            numBox.innerHTML = '✓';
+          } else {
+            nav.className = 'step-nav flex items-center gap-4 p-3 rounded-2xl text-gray-400 transition';
+            numBox.className = 'w-8 h-8 rounded-full border border-gray-500 flex items-center justify-center font-bold text-sm';
+            numBox.innerHTML = i < 10 ? `0${i}` : i;
+          }
+        }
+      }
+
+      // Buttons
+      document.getElementById('btnBack').classList.toggle('invisible', currentStep === 1);
+      
+      if (currentStep === totalSteps) {
+        document.getElementById('btnNext').classList.add('hidden');
+        document.getElementById('btnSubmit').classList.remove('hidden');
+      } else {
+        document.getElementById('btnNext').classList.remove('hidden');
+        document.getElementById('btnSubmit').classList.add('hidden');
+        
+        const btnNext = document.getElementById('btnNext');
+        if (currentStep !== 1) {
+          btnNext.disabled = false;
+          btnNext.classList.replace('bg-gray-400', 'bg-[#D4E858]');
+          btnNext.classList.add('text-[#0E5143]');
+        } else {
+          validateStep1();
+        }
+      }
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzv7bkk4frmW_aQP3Jd9xhlJMCqow-LIiLZ-6FgQvJdkJbuY76edYg-_rAwbxqrrWU/exec'; 
+      
+      const form = document.getElementById('applyForm');
+      const btnSubmit = document.getElementById('btnSubmit');
+      const spinner = document.getElementById('spinner');
+      
+      btnSubmit.disabled = true;
+      spinner.classList.remove('hidden');
+      btnSubmit.classList.add('opacity-70');
+
+      const data = new URLSearchParams(new FormData(form));
+
+      fetch(scriptURL, { 
+        method: 'POST', 
+        body: data
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          Swal.fire({
+            icon: 'success',
+            title: 'ส่งใบสมัครสำเร็จ!',
+            text: 'ระบบได้ส่งข้อมูลและอีเมลยืนยันเรียบร้อยแล้ว',
+            confirmButtonColor: '#0E5143',
+            confirmButtonText: 'ตกลง'
+          }).then(() => {
+            // ซ่อนหน้าฟอร์ม และแสดงหน้า Success View แทนการทำ Reload
+            document.getElementById('formView').classList.add('hidden-section');
+            document.getElementById('successView').classList.remove('hidden-section');
+            window.scrollTo(0,0);
+          });
+        } else {
+          throw new Error(data.message || 'ระบบขัดข้อง');
+        }
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'ส่งข้อมูลไม่สำเร็จ',
+          text: 'เกิดข้อผิดพลาด: ' + error.message,
+          confirmButtonColor: '#d33'
+        });
+        
+        btnSubmit.disabled = false;
+        spinner.classList.add('hidden');
+        btnSubmit.classList.remove('opacity-70');
+      });
+    }
+
+    // รายชื่อรูปภาพ TOR
+    const torImages = [
+      "https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/Final%20-%20TOR%20%E0%B9%82%E0%B8%8B%E0%B8%99%20F%202570-1.png?raw=true",
+      "https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/Final%20-%20TOR%20%E0%B9%82%E0%B8%8B%E0%B8%99%20F%202570-2.png?raw=true",
+      "https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/Final%20-%20TOR%20%E0%B9%82%E0%B8%8B%E0%B8%99%20F%202570-3.png?raw=true",
+      "https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/Final%20-%20TOR%20%E0%B9%82%E0%B8%8B%E0%B8%99%20F%202570-4.png?raw=true",
+      "https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/Final%20-%20TOR%20%E0%B9%82%E0%B8%8B%E0%B8%99%20F%202570-5.png?raw=true"
+    ];
+
+    let currentTorIndex = 0;
+
+    function updateTorViewer() {
+      document.getElementById('torImage').src = torImages[currentTorIndex];
+      document.getElementById('torPageNum').innerText = `หน้า ${currentTorIndex + 1}/${torImages.length}`;
+    }
+
+    function nextTorPage() {
+      if (currentTorIndex < torImages.length - 1) {
+        currentTorIndex++;
+      } else {
+        currentTorIndex = 0;
+      }
+      updateTorViewer();
+    }
+
+    function prevTorPage() {
+      if (currentTorIndex > 0) {
+        currentTorIndex--;
+      } else {
+        currentTorIndex = torImages.length - 1;
+      }
+      updateTorViewer();
+    }
+
+    // ฟังก์ชันเปิดรูปภาพแผนที่
+    function openMapModal() {
+      const modal = document.getElementById('mapModal');
+      const img = document.getElementById('modalImage');
+      
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        img.classList.replace('scale-95', 'scale-100');
+      }, 10);
+    }
+
+    // ฟังก์ชันปิดรูปภาพแผนที่
+    function closeMapModal() {
+      const modal = document.getElementById('mapModal');
+      const img = document.getElementById('modalImage');
+      
+      modal.classList.add('opacity-0');
+      img.classList.replace('scale-100', 'scale-95');
+      
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+  </script>
+
+  <!-- ==========================================
+       ส่วนที่ต้องเพิ่ม: Modal สำหรับขยายรูป TOR
+  =========================================== -->
+  <div id="torModal" class="hidden fixed inset-0 z-[1000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-zoom-out opacity-0 transition-opacity duration-300" onclick="closeTorModal()">
+    <!-- ปุ่มปิด (X) -->
+    <button class="absolute top-4 right-4 md:top-6 md:right-6 text-white bg-white/20 hover:bg-red-500 rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold transition z-[1010]">
+      &times;
+    </button>
+    
+    <!-- รูปภาพที่จะแสดงตอนขยาย (ใส่ event.stopPropagation() เพื่อไม่ให้คลิกรูปแล้วปิด) -->
+    <img id="modalTorImage" src="" 
+         class="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300 cursor-default" 
+         alt="TOR ขยายใหญ่"
+         onclick="event.stopPropagation()">
+  </div>
+
+  <script>
+  // ฟังก์ชันจัดการเมื่อผู้ใช้เปลี่ยนโซนพื้นที่
+    function handleZoneChange() {
+      // 1. จัดการเรื่องช่องกรอกราคาเสนอ (พื้นที่พิเศษ)
+      const specialZoneChecked = document.getElementById('specialZone').checked;
+      const priceBox = document.getElementById('priceBox');
+      const proposedPriceInput = document.getElementById('proposedPrice');
+      
+      if (specialZoneChecked) {
+        priceBox.classList.remove('hidden');
+        proposedPriceInput.setAttribute('required', 'true');
+      } else {
+        priceBox.classList.add('hidden');
+        proposedPriceInput.removeAttribute('required');
+        proposedPriceInput.value = ''; // เคลียร์ค่าทิ้งถ้าไม่ได้เลือก
+      }
+
+      // 2. จัดการเงื่อนไขจำนวนล็อก (ให้เลือก 2 ล็อกได้เฉพาะ F2 4x2 และ F3)
+      const selectedZone = document.querySelector('input[name="zone"]:checked').value;
+      const lock2Radio = document.getElementById('lock2');
+      const twoLockLabel = document.getElementById('twoLockLabel');
+      
+      // เช็คว่าเลือก F2(4x2) หรือ F3 หรือไม่ (เช็คจาก text บางส่วนใน value)
+      const isAllowedTwoLocks = selectedZone.includes("กว้าง 4 เมตร ลึก 2 เมตร") || selectedZone.includes("โซน F3");
+
+      if (isAllowedTwoLocks) {
+        // อนุญาตให้เลือก 2 ล็อกได้
+        lock2Radio.disabled = false;
+        twoLockLabel.classList.remove('opacity-50');
+      } else {
+        // ไม่อนุญาต บังคับกลับไป 1 ล็อก
+        lock2Radio.disabled = true;
+        lock2Radio.checked = false;
+        twoLockLabel.classList.add('opacity-50');
+        document.querySelector('input[name="lockCount"][value="1"]').checked = true;
+      }
+    }
+
+    // ฟังก์ชันเปิด Modal รูปตัวอย่างพื้นที่
+    function openZoneImageModal() {
+      // ใช้โครงสร้าง Modal ของ Map มาประยุกต์ใช้เพื่อความง่าย
+      const modal = document.getElementById('mapModal');
+      const modalImg = document.getElementById('modalMapImage');
+      
+      if(modal && modalImg) {
+        // เปลี่ยน source รูปเป็นรูปโซน F
+        modalImg.src = "https://github.com/tt003-max/kaset-fair-imagesF2027/blob/main/unnamed%20(1).jpg?raw=true"; 
+        
+        modal.classList.remove('hidden');
+        void modal.offsetWidth; 
+        modal.classList.remove('opacity-0');
+        modalImg.classList.replace('scale-95', 'scale-100');
+      }
+    }
+
+    // ฟังก์ชันเปิด Modal รูป TOR
+    function openTorModal() {
+      const modal = document.getElementById('torModal');
+      const modalImg = document.getElementById('modalTorImage');
+      const currentImg = document.getElementById('torImage'); // ดึงรูปปัจจุบันที่กำลังแสดงอยู่
+      
+      if(modal && modalImg && currentImg) {
+        modalImg.src = currentImg.src; // เอารูปปัจจุบันไปใส่ใน Modal
+        
+        modal.classList.remove('hidden');
+        // บังคับให้เบราว์เซอร์รับรู้ว่าเอา hidden ออกแล้ว ก่อนเล่น Transition
+        void modal.offsetWidth; 
+        
+        modal.classList.remove('opacity-0');
+        modalImg.classList.replace('scale-95', 'scale-100');
+      }
+    }
+
+    // ฟังก์ชันปิด Modal รูป TOR
+    function closeTorModal() {
+      const modal = document.getElementById('torModal');
+      const modalImg = document.getElementById('modalTorImage');
+      
+      if(modal && modalImg) {
+        modal.classList.add('opacity-0');
+        modalImg.classList.replace('scale-100', 'scale-95');
+        
+        // รอให้ Animation จบก่อนค่อยซ่อน (300ms)
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+// ฟังก์ชันคำนวณและสรุปค่าใช้จ่ายใน STEP 5 อัตโนมัติ
+    function updateCostSummary() {
+      let zoneRadios = document.getElementsByName('zone');
+      let selectedZoneStr = "";
+      let areaPrice = 0;
+      let isSpecialZone = false;
+      
+      // 1. ดึงราคาจากโซนที่เลือก
+      for(let r of zoneRadios) {
+        if(r.checked) {
+          selectedZoneStr = r.value;
+          if(r.id === 'specialZone') {
+            isSpecialZone = true;
+          } else {
+            // ดึงตัวเลขราคาออกมาจากข้อความ
+            let match = selectedZoneStr.match(/ราคา\s*([\d,]+)/);
+            if(match) {
+              areaPrice = parseInt(match[1].replace(/,/g, ''));
+            }
+          }
+          break;
+        }
+      }
+
+      // ถ้ายื่นเสนอราคาพิเศษ ให้ดึงค่าจากช่องกรอก
+      if(isSpecialZone) {
+        let proposed = document.getElementById('proposedPrice').value;
+        areaPrice = proposed ? parseInt(proposed) : 0;
+      }
+
+      // 2. ตรวจสอบจำนวนล็อก (x1 หรือ x2)
+      let lockRadios = document.getElementsByName('lockCount');
+      let lockMultiplier = 1;
+      for(let r of lockRadios) {
+        if(r.checked && r.value.includes('2')) {
+          lockMultiplier = 2;
+        }
+      }
+
+      let totalAreaPrice = areaPrice * lockMultiplier;
+
+      // 3. ดึงราคาค่าไฟฟ้า
+      let elecRadios = document.getElementsByName('electricity');
+      let elecPrice = 0;
+      for(let r of elecRadios) {
+        if(r.checked) {
+           let match = r.value.match(/เงิน\s*([\d,]+)/);
+           if(match) {
+             elecPrice = parseInt(match[1].replace(/,/g, ''));
+           }
+           break;
+        }
+      }
+
+      // 4. คำนวณรวม (บวกค่าสมัคร 500)
+      const appFee = 500;
+      let totalPrice = totalAreaPrice + elecPrice + appFee;
+
+      // 5. แสดงผลบนหน้าเว็บ (STEP 5)
+      if(document.getElementById('summaryZone')) {
+        document.getElementById('summaryZone').innerText = selectedZoneStr || "-";
+        document.getElementById('summaryAreaPrice').innerText = totalAreaPrice.toLocaleString();
+        document.getElementById('summaryElecPrice').innerText = elecPrice.toLocaleString();
+        document.getElementById('summaryTotalPrice').innerText = totalPrice.toLocaleString();
+      }
+    }
+
+    // เปิด/ปิด ปุ่มส่งใบสมัครเมื่อติ๊ก Checkbox รับทราบเงื่อนไข
+    function checkFinalSubmit() {
+       const btnSubmit = document.getElementById('btnSubmit');
+       const acceptCb = document.getElementById('acceptFinalRules');
+       if (acceptCb && btnSubmit) {
+           btnSubmit.disabled = !acceptCb.checked;
+       }
+    }
+
+    // แทรกการคำนวณราคาก่อนเปลี่ยนไปหน้า 5
+    const originalChangeStep = changeStep;
+    changeStep = function(stepDir) {
+      if (currentStep === 4 && stepDir === 1) {
+        updateCostSummary(); // คำนวณราคาก่อนเข้า STEP 5
+      }
+      originalChangeStep(stepDir);
+    }
+
+// ฟังก์ชันสำหรับเคลียร์ฟอร์มและกลับไปหน้าแรก หลังจากส่งข้อมูลเสร็จสิ้น
+    function resetToHome() {
+      // 1. เคลียร์ข้อมูลในฟอร์ม
+      document.getElementById('applyForm').reset();
+      
+      // 2. รีเซ็ตการแสดงผลหน้าย่อยกลับไปที่ Step 1
+      document.querySelectorAll('.form-section').forEach(sec => sec.classList.add('hidden-section'));
+      document.getElementById('section1').classList.remove('hidden-section');
+      currentStep = 1;
+      updateSidebarUI();
+      
+      // 3. จัดการการแสดงผลหน้าต่างๆ
+      document.getElementById('successView').classList.add('hidden-section');
+      document.getElementById('landingView').classList.remove('hidden-section');
+      
+      // 4. เลื่อนกลับไปบนสุด
+      window.scrollTo(0,0);
+    }
+  </script>
+
+
+</body>
+</html>
